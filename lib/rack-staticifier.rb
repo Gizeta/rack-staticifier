@@ -69,7 +69,7 @@ module Rack #:nodoc:
       request_path = env['PATH_INFO']
       request_path << 'index.html' if request_path.end_with?('/')
 
-      basename     = ::File.basename request_path
+      basename     = ::File.basename Rack::Utils.unescape(request_path)
       dirname      = ::File.join config[:root], ::File.dirname(request_path)
       fullpath     = ::File.join dirname, basename
 
